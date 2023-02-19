@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ZipCodeController;
+use App\Services\Api\V1\DocumentReader\ReadDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('zip-codes', ZipCodeController::class);
