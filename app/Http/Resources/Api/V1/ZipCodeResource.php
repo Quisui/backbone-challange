@@ -16,23 +16,14 @@ class ZipCodeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'zip_code' => $this->d_codigo,
+            'zip_code' => $this->d_codigo ?? '',
             'locality' => Str::upper($this->d_ciudad),
             'federal_entity' => [
                 'key' =>  (int) $this->c_estado,
                 'name' => Str::upper($this->d_estado),
                 'code' => $this->c_CP,
             ],
-            'settlements' => [
-                [
-                    'key' => 1,
-                    'name' => Str::upper($this->d_asenta),
-                    'zone_type' => Str::upper($this->d_zona),
-                    'settlement_type' => [
-                        'name' => $this->d_tipo_asenta,
-                    ],
-                ],
-            ],
+            'settlements' => $this->settlements,
             'municipality' => [
                 'key' => (int) $this->c_mnpio,
                 'name' => Str::upper($this->D_mnpio),

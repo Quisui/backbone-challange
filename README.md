@@ -12,6 +12,7 @@
 10) php artisan config:cache
 11) composer dump-autoload
 
+## Prueba la api = http://54.161.253.149/api/zip-codes/{zip_code} [api](http://54.161.253.149/api/zip-codes/)
 ### Primer paso
 - Lo que hice principalmente fue descargar el archivo que contenia todos los codigos e informacion que necesitaba para llevar a cabo el challange
 - Leer el archivo con la libreria phpoffice/phpspreadsheet

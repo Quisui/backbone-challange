@@ -1,0 +1,15 @@
+// Dockerrun.aws.json
+
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "quisui/backbone-challange:latest",
+        "Update": "true"
+    },
+    "Ports": [
+        {
+            "ContainerPort": "80"
+        }
+    ],
+    "Logging": "/var/log/nginx"
+}

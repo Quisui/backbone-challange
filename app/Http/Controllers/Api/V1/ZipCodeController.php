@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\ZipCodeResource;
 use App\Models\ZipCode;
+use App\Services\Api\V1\ZipCode\ZipCodeService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,7 +18,7 @@ class ZipCodeController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(['message' => ""], Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -26,9 +27,9 @@ class ZipCodeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($request)
     {
-        //
+        return response()->json(['message' => ""], Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -37,12 +38,18 @@ class ZipCodeController extends Controller
      * @param  \App\Models\ZipCode  $zipCode
      * @return \Illuminate\Http\Response
      */
-    public function show($zipCode)
+    public function show($zipCodeId)
     {
-        $zipCode = ZipCode::zipCode($zipCode)->first();
+        if (!is_numeric($zipCodeId))
+            return response()->json(['message' => "Server Error"], Response::HTTP_INTERNAL_SERVER_ERROR);
 
-        abort_if(empty($zipCode), Response::HTTP_INTERNAL_SERVER_ERROR);
+        $zipCode = ZipCode::zipCode($zipCodeId)->first();
+        if (empty($zipCode))
+            return response()->json(['message' => "No query results for model [App\\Models\\ZipCode] " . $zipCodeId], Response::HTTP_NOT_FOUND);
 
+
+        $settlements = (new ZipCodeService)->resolveSettlements($zipCode->id, $zipCode->d_codigo);
+        $zipCode->settlements = $settlements;
         return ZipCodeResource::make($zipCode);
     }
 
@@ -53,9 +60,9 @@ class ZipCodeController extends Controller
      * @param  \App\Models\ZipCode  $zipCode
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ZipCode $zipCode)
+    public function update(Request $request, $zipCode)
     {
-        //
+        return response()->json(['message' => ""], Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -64,8 +71,8 @@ class ZipCodeController extends Controller
      * @param  \App\Models\ZipCode  $zipCode
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ZipCode $zipCode)
+    public function destroy($zipCode)
     {
-        //
+        return response()->json(['message' => ""], Response::HTTP_NOT_FOUND);
     }
 }

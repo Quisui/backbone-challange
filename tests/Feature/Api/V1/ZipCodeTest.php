@@ -5,6 +5,7 @@ namespace Tests\Feature\Api\V1;
 use App\Models\ZipCode;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tests\TestCase;
 
 class ZipCodeTest extends TestCase
@@ -34,6 +35,7 @@ class ZipCodeTest extends TestCase
     public function testZipCodeDoesNotExist()
     {
         $this->getJson('/api/zip-codes/notexistingcode')
-            ->assertStatus(500);
+            ->assertStatus(500)
+            ->assertJsonStructure(['message']);
     }
 }
