@@ -34,3 +34,9 @@
  Tengo dos tipos de tests
     - Feature para el unico endpoint que vamos a utilizar en este challange [ver](https://github.com/Quisui/backbone-challange/blob/develop/tests/Feature/Api/V1/ZipCodeTest.php)
     - Unit para testing de lectura de archivos de cualquier tipo admitido hasta el momento [ver](https://github.com/Quisui/backbone-challange/blob/develop/tests/Unit/DocumentReaderTest.php)
+
+### Cuarto Paso
+    ## Ci/CD
+    Workflow actions 
+    1) testing para saber que la app funciona [revisa](https://github.com/Quisui/backbone-challange/blob/master/.github/workflows/laravel.yml)
+    2) Si fue success hace git pull en la instancia ec2 [revisa](https://github.com/Quisui/backbone-challange/blob/master/.github/workflows/aws.yml)
