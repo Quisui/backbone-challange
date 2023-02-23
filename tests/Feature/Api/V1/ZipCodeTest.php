@@ -20,6 +20,7 @@ class ZipCodeTest extends TestCase
     public function testZipCodeExists()
     {
         $zipCode = ZipCode::factory()->create();
+        $zipCode = ZipCode::first();
         $this->getJson('/api/zip-codes/' . $zipCode->d_codigo)
             ->assertOk()
             ->assertJsonStructure([
@@ -35,7 +36,7 @@ class ZipCodeTest extends TestCase
     public function testZipCodeDoesNotExist()
     {
         $this->getJson('/api/zip-codes/notexistingcode')
-            ->assertStatus(500)
+            ->assertStatus(404)
             ->assertJsonStructure(['message']);
     }
 }

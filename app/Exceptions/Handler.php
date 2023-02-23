@@ -47,13 +47,5 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-
-        $this->renderable(function (NotFoundHttpException $e, $request) {
-            if ($request->is('api/zip-codes/*')) { // <- Add your condition here
-                return response()->json([
-                    'message' => ""
-                ], 404);
-            }
-        });
     }
 }
