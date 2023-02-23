@@ -12,6 +12,8 @@ class ZipCode extends Model
     use HasFactory;
     use CleanStringTrait;
 
+    protected $primaryKey =  "d_codigo";
+
     /**
      * Scope a query to only include users of a given type.
      *

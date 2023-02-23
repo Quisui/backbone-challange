@@ -8,6 +8,7 @@ use App\Models\ZipCode;
 use App\Services\Api\V1\ZipCode\ZipCodeService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ZipCodeController extends Controller
 {
@@ -32,22 +33,16 @@ class ZipCodeController extends Controller
         return response()->json(['message' => ""], Response::HTTP_NOT_FOUND);
     }
 
+
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\ZipCode  $zipCode
      * @return \Illuminate\Http\Response
      */
-    public function show($zipCodeId)
+    public function show(ZipCode $zipCode)
     {
-        if (!is_numeric($zipCodeId))
-            return response()->json(['message' => "Server Error"], Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        $zipCode = ZipCode::zipCode($zipCodeId)->first();
-        if (empty($zipCode))
-            return response()->json(['message' => "No query results for model [App\\Models\\ZipCode] " . $zipCodeId], Response::HTTP_NOT_FOUND);
-
-
         $settlements = (new ZipCodeService)->resolveSettlements($zipCode->id, $zipCode->d_codigo);
         $zipCode->settlements = $settlements;
         return ZipCodeResource::make($zipCode);
